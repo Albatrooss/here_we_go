@@ -14,8 +14,7 @@ If for some weird reason you want to clone it create a docker-compose.override.y
 version: '3'
 services:
     server:
-        command:
-            - npm run start
+        command: npm run start
         environment:
             SERVER_HOSTNAME: here_we_go_server_1
             SERVER_PORT: 3001
