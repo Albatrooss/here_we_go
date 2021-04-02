@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import axios  from 'axios'
 import { Message, MyResponse } from '../interfaces';
-import Link from 'next/link';
+// import Link from 'next/link';
 import styled from 'styled-components';
 import { BASE_URL } from '../utils/constants';
 import { Form, Input } from '../theme/comps/form';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Error } from '../theme/comps';
 
 const Single = styled.p`
@@ -38,6 +38,7 @@ const IndexPage = ({ messages }: Props) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    return setError('One day this will work..')
     try{
       const url = BASE_URL + 'api/messages/add-one/';
       const res = await axios.post(url, {text: msg});

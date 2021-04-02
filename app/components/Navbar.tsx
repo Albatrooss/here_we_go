@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { NavWrapper, Nav, Logo, LogoTop, LogoBottom, NavRoute, NavRoutes, NavRouter, RightSide, RightItem } from '../theme/comps/nav';
+// import Link from 'next/link';
+import { NavWrapper, Nav, Logo, LogoTop, LogoBottom, NavRoutes, /*NavRoute, NavRouter,*/ RightSide, RightItem } from '../theme/comps/nav';
 import { FaSearch, FaBell, FaRegUserCircle } from 'react-icons/fa';
 import theme from '../theme';
 
@@ -24,9 +24,9 @@ const Navbar = ({}: Props) => {
                     <LogoBottom>OHOHOH</LogoBottom>
                 </Logo>
                 <NavRoutes>
-                    <NavRoute>
+                    {/* <NavRoute>
                         <Link href='/pilates'><NavRouter>WTF</NavRouter></Link>
-                    </NavRoute>
+                    </NavRoute> */}
                 </NavRoutes>
                 <RightSide>
                     <RightItem><FaSearch color={theme.color.black} fontWeight={'bold'}/></RightItem>
