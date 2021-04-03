@@ -55,6 +55,7 @@ const IndexPage = ({ }: Props) => {
   const fetchData = async () => {
     try {
       const url = BASE_URL + 'api/messages/';
+      console.log('URL: ', url);
       const res = await axios.get(url);
       let data: MyResponse = res.data;
       setMessages(data.data);
