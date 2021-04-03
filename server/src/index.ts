@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import cors from 'cors';
 import logging from '../config/logging';
 import config from '../config/config';
 
@@ -19,17 +20,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use((req, res, next) => {
-    res.header('Acess-Control-Allow-Origin', '*');
-    res.header('Acess-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-    if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-
-    next()
-})
+app.use(cors());
 
 app.use(express.json());
 
@@ -38,7 +29,11 @@ app.use('/api/messages', messageRoutes)
 app.use((req, res, next) => {
     const error =  new Error('Not found');
 
-    res.status(404).send('<h1>404 Not found</h1>');
+    res.status(404).json({
+        success: false,
+        msg: 'Not found',
+        data: {}
+    });
 })
 
 const httpServer = http.createServer(app);

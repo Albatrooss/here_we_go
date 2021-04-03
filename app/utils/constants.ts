@@ -1,2 +1,2 @@
-// export const BASE_URL = '';
-export const BASE_URL = 'http://here_we_go_server_1:3001/';
+export const BASE_URL = process.env.NEXT_PUBLIC_URL;
+export const INTERNAL_URL = process.env.INTERNAL_URL;

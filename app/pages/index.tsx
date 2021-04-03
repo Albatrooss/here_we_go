@@ -3,9 +3,9 @@ import axios  from 'axios'
 import { Message, MyResponse } from '../interfaces';
 // import Link from 'next/link';
 import styled from 'styled-components';
-import { BASE_URL } from '../utils/constants';
 import { Form, Input } from '../theme/comps/form';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { BASE_URL } from '../utils/constants';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Error } from '../theme/comps';
 
 const Single = styled.p`
@@ -22,12 +22,12 @@ const Single = styled.p`
 `;
 
 interface Props {
-  messages: Message[]  
+  // messages: Message[]  
 }
 
-const IndexPage = ({ messages }: Props) => {
+const IndexPage = ({ }: Props) => {
 
-  // const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [msg, setMsg] = useState<string>('');
   const [error, setError] = useState<string>('');
 
@@ -38,14 +38,13 @@ const IndexPage = ({ messages }: Props) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    return setError('One day this will work..')
     try{
       const url = BASE_URL + 'api/messages/add-one/';
       const res = await axios.post(url, {text: msg});
       let data: MyResponse = res.data;
       if (!data.success) return setError(data.msg);
       setMsg('');
-      // fetchData();
+      fetchData();
     } catch(error) {
       console.log(error)
       if (error.response && error.response.data && error.response.data.msg) return setError(error.response.data.msg);
@@ -53,22 +52,22 @@ const IndexPage = ({ messages }: Props) => {
     }
   }
 
-  // const fetchData = async () => {
-  //   try {
-  //     const url = BASE_URL + '/api/messages/';
-  //     const res = await axios.get(url);
-  //     let data: MyResponse = res.data;
-  //     setMessages(data.data);
-  //   } catch(error) {
-  //     console.log(error.message);
-  //     if (error.response && error.response.data) console.log(error.response.data);
-  //     setMessages([]);
-  //   }
-  // }
+  const fetchData = async () => {
+    try {
+      const url = BASE_URL + 'api/messages/';
+      const res = await axios.get(url);
+      let data: MyResponse = res.data;
+      setMessages(data.data);
+    } catch(error) {
+      console.log(error.message);
+      if (error.response && error.response.data) console.log(error.response.data);
+      setMessages([]);
+    }
+  }
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [])
+  useEffect(() => {
+    fetchData();
+  }, [])
 
   return (
     <>
@@ -93,21 +92,22 @@ const IndexPage = ({ messages }: Props) => {
   )
 }
 
-export const getStaticProps = async () => {
-  try {
-    const url = BASE_URL + 'api/messages/';
-    const res = await axios.get(url);
-    let data: MyResponse = res.data;
-    return { 
-      props: {messages: data.data }
-    };
-  } catch(error) {
-    console.log(error.message);
-    if (error.response && error.response.data) console.log(error.response.data);
-    return { 
-      props: {messages: [] }
-    };
-  }
-}
+// export const getStaticProps = async () => {
+//   try {
+//     console.log(INTERNAL_URL)
+//     const url = INTERNAL_URL + 'api/messages/';
+//     const res = await axios.get(url);
+//     let data: MyResponse = res.data;
+//     return { 
+//       props: {messages: data.data }
+//     };
+//   } catch(error) {
+//     console.log(error.message);
+//     if (error.response && error.response.data) console.log(error.response.data);
+//     return { 
+//       props: {messages: [] }
+//     };
+//   }
+// }
 
 export default IndexPage
