@@ -20,7 +20,10 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(cors());
+app.use(cors({
+    origin: '*', 
+    allowedHeaders: [ 'Accept-Version', 'Authorization', 'Credentials', 'Content-Type' ]
+}));
 
 // app.use((req, res, next) => {
 //     logging.debug(NAMESPACE, 'cors??')
