@@ -20,20 +20,20 @@ app.use((req, res, next) => {
     next();
 })
 
-// app.use(cors());
+app.use(cors());
 
-app.use((req, res, next) => {
-    logging.debug(NAMESPACE, 'cors??')
-    res.header('Acess-Control-Allow-Origin', '*');
-    res.header('Acess-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+// app.use((req, res, next) => {
+//     logging.debug(NAMESPACE, 'cors??')
+//     res.header('Acess-Control-Allow-Origin', '*');
+//     res.header('Acess-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-    if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({cors: 'cors'});
-    }
+//     if (req.method == 'OPTIONS') {
+//         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+//         return res.status(200).json({cors: 'cors'});
+//     }
 
-    next()
-})
+//     next()
+// })
 
 app.use(express.json());
 
